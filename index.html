@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>Entre Cerros y Balas · Ochoa Cesar</title>
+<meta name="description" content="Experiencia de realidad virtual en Unreal Engine ambientada en Jujuy, inspirada en las luchas por la independencia en el norte argentino.">
+<meta property="og:title" content="Entre Cerros y Balas">
+<meta property="og:description" content="Un gaucho atraviesa los paisajes jujeños a caballo, enfrentándose a las tropas realistas.">
+<meta property="og:image" content="assets/portada.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Montserrat:wght@500;600;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2212%22 fill=%22%23000%22/%3E%3Cpath d=%22M6 50 L22 26 L32 38 L44 20 L58 50Z%22 fill=%22%23e29a46%22/%3E%3Cpath d=%22M6 50 L22 34 L32 44 L44 30 L58 50Z%22 fill=%22%23c9542f%22/%3E%3C/svg%3E">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<div class="escenario" aria-hidden="true"><canvas id="escena"></canvas></div>
+<div class="papel" aria-hidden="true"></div>
+
+<header class="barra">
+  <a href="#portada" class="autor">Ochoa Cesar</a>
+  <nav class="puntos" aria-label="Secciones"></nav>
+</header>
+
+<main>
+  <section id="portada" class="lamina portada" data-nombre="Portada">
+    <h1 class="titulo grande revelar">Entre Cerros<br><span>y</span><br>Balas</h1>
+    <p class="bajada revelar">Una experiencia de realidad virtual en las quebradas de Jujuy</p>
+    <a href="#premisa" class="deslizar revelar" aria-label="Bajar a Premisa"><span></span>Deslizá para cabalgar</a>
+    <div class="franja-negra" aria-hidden="true"></div>
+  </section>
+
+  <section id="premisa" class="lamina centrada" data-nombre="Premisa">
+    <h2 class="titulo revelar">Premisa</h2>
+    <div class="tarjeta revelar">
+      <p>La propuesta consiste en desarrollar una experiencia de realidad virtual en <b>Unreal Engine</b> ambientada en <b>Jujuy</b>, inspirada en el contexto histórico de las <b>luchas por la independencia en el norte argentino</b>. El jugador se pondrá en el lugar de un <b>gaucho</b> que atraviesa los paisajes jujeños a caballo, enfrentándose a las tropas realistas que intentan detener su avance.</p>
+    </div>
+  </section>
+
+  <section id="jugabilidad" class="lamina dividida" data-nombre="Jugabilidad">
+    <div class="col-texto">
+      <h2 class="titulo inclinado revelar">Jugabilidad</h2>
+      <div class="tarjeta revelar">
+        <p>La <b>cooperación</b> estará dividida entre los dos gauchos. Mientras <b>uno</b> se encargará de controlar el caballo, esquivar obstáculos y recoger recursos como munición o vida.</p>
+        <p>El <b>otro</b> deberá utilizar su arma para enfrentarse a los soldados realistas y proteger a su compañero.</p>
+        <p>De esta manera, <b>cada jugador tendrá una función diferente</b> pero necesaria para superar el recorrido.</p>
+      </div>
+      <div class="roles revelar">
+        <div class="rol"><span class="icono">🐎</span><b>Jinete</b><small>Conduce, esquiva y recoge</small></div>
+        <div class="rol"><span class="icono">🎯</span><b>Tirador</b><small>Dispara y protege</small></div>
+      </div>
+    </div>
+    <div class="galeria revelar">
+      <figure><img src="assets/gaucho-vestimenta.jpg" alt="Gaucho y prendas de su vestimenta" loading="lazy"><figcaption>Vestimenta del gaucho</figcaption></figure>
+      <figure><img src="assets/gaucho-epocas.jpg" alt="Evolución de la vestimenta gaucha entre 1780 y 1900" loading="lazy"><figcaption>1780 · 1820 · 1870 · 1900</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="enemigos" class="lamina centrada" data-nombre="Enemigos">
+    <h2 class="titulo revelar">Enemigos</h2>
+    <div class="galeria tres revelar">
+      <figure><img src="assets/enemigo-1.jpg" alt="Grabado de soldados realistas disparando" loading="lazy"></figure>
+      <figure><img src="assets/enemigo-2.jpg" alt="Uniformes de infantería y caballería realista" loading="lazy"></figure>
+      <figure><img src="assets/enemigo-3.jpg" alt="Soldado realista con morrión blanco" loading="lazy"></figure>
+    </div>
+    <p class="nota-escena revelar">Las tropas realistas te esperan en lo alto de los cerros</p>
+  </section>
+
+  <section id="entorno" class="lamina dividida" data-nombre="Entorno">
+    <div class="col-texto">
+      <h2 class="titulo revelar">Entorno</h2>
+      <div class="tarjeta revelar">
+        <p>El entorno tendrá una fuerte identidad jujeña, utilizando como <b>inspiración</b> los cerros, quebradas, caminos de tierra y paisajes característicos de la <b>Quebrada de Humahuaca</b>.</p>
+      </div>
+    </div>
+    <div class="galeria mosaico revelar">
+      <figure class="ancha"><img src="assets/entorno-1.jpg" alt="Escenario de desierto en un motor 3D" loading="lazy"></figure>
+      <figure><img src="assets/entorno-2.jpg" alt="Camino de tierra entre cerros rojos" loading="lazy"></figure>
+      <figure><img src="assets/entorno-3.jpg" alt="Quebrada de Humahuaca con cerros de colores" loading="lazy"></figure>
+    </div>
+  </section>
+
+  <section id="referencias" class="lamina dividida" data-nombre="Referencias">
+    <div class="col-texto">
+      <h2 class="titulo inclinado revelar">Referencias</h2>
+      <div class="tarjeta fuerte revelar">
+        <p>Se busca trasladar la experiencia de los shooters arcade cooperativos para 2 jugadores al formato de realidad virtual. La idea es ofrecer una experiencia dinámica, accesible y de ritmo ágil, donde los jugadores avanzan de forma constante enfrentando enemigos y obstáculos que requieren reflejos rápidos.</p>
+      </div>
+    </div>
+    <div class="galeria mosaico cuatro revelar">
+      <figure class="ancha"><img src="assets/ref-1.jpg" alt="Referencia: Metal Slug Tactics" loading="lazy"></figure>
+      <figure><img src="assets/ref-2.jpg" alt="Referencia: corredor sin fin" loading="lazy"></figure>
+      <figure><img src="assets/ref-3.jpg" alt="Referencia: arcade de disparos" loading="lazy"></figure>
+      <figure class="ancha"><img src="assets/ref-4.jpg" alt="Referencia: shooter sobre rieles" loading="lazy"></figure>
+    </div>
+  </section>
+
+  <section id="jugar" class="lamina centrada" data-nombre="Jugar">
+    <h2 class="titulo revelar">¡A caballo!</h2>
+    <div class="tarjeta revelar">
+      <p>Probá una <b>demo web</b> del recorrido: cabalgá por la quebrada, disparale a las tropas realistas y recogé munición y vida en el camino.</p>
+    </div>
+    <a class="boton revelar" href="juego/index.html">Jugar la demo</a>
+  </section>
+
+  <section id="gracias" class="lamina portada final" data-nombre="Gracias">
+    <div class="franja-negra arriba" aria-hidden="true"></div>
+    <h2 class="titulo grande revelar">¡Muchas<br>Gracias!</h2>
+    <p class="bajada revelar">Entre Cerros y Balas · Ochoa Cesar</p>
+    <div class="franja-negra" aria-hidden="true"></div>
+  </section>
+</main>
+
+<div class="visor" hidden><img alt=""><button aria-label="Cerrar">✕</button></div>
+
+<script type="module" src="escena.js"></script>
+<script src="pagina.js" defer></script>
+</body>
+</html>

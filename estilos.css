@@ -1,0 +1,117 @@
+:root{
+  --rojo:#d1121c; --rojo-osc:#5c0707; --tarjeta:#ffe996; --tinta:#141210;
+  --cielo:#6fa6cf; --ocre:#e3a24c; --naranja:#d9773a; --arena:#ecd4a0; --negro:#000;
+  --titulo:"Alfa Slab One","Rockwell Extra Bold","Rockwell","Georgia",serif;
+  --texto:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#9cc2da;color:var(--tinta);font-family:var(--texto);overflow-x:hidden}
+.escenario{position:sticky;top:0;height:100vh;height:100lvh;margin-bottom:-100vh;margin-bottom:-100lvh;z-index:0;overflow:hidden}
+#escena{width:100%;height:100%;display:block}
+.sin-3d body,body.sin-3d{background:#9cc2da url(assets/portada.jpg) center/cover fixed}
+.papel{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.22;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .3 0 0 0 0 .18 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.papel::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(90,50,20,.45))}
+
+/* barra superior como la portada */
+.barra{position:fixed;top:0;left:0;right:0;z-index:20;height:calc(46px + env(safe-area-inset-top));padding:env(safe-area-inset-top) 18px 0;
+  background:var(--negro);display:flex;align-items:center;justify-content:space-between}
+.autor{font-family:var(--titulo);color:var(--rojo);text-decoration:none;font-size:20px;letter-spacing:.02em;
+  -webkit-text-stroke:.6px #6b0a0a;text-shadow:0 2px 0 #3d0404}
+.puntos{display:flex;gap:7px}
+.puntos a{width:10px;height:10px;border-radius:50%;border:2px solid #e6c88f;opacity:.55;transition:all .3s}
+.puntos a.activo{background:var(--rojo);border-color:var(--rojo);opacity:1;transform:scale(1.25)}
+
+main{position:relative}
+.lamina{min-height:100svh;padding:calc(76px + env(safe-area-inset-top)) 18px 70px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;position:relative}
+.lamina + .lamina{margin-top:22vh}
+
+/* títulos rojos tipo slab con contorno */
+.titulo{font-family:var(--titulo);font-weight:400;color:var(--rojo);margin:0;text-align:center;line-height:1;
+  font-size:clamp(46px,13vw,104px);letter-spacing:.015em;
+  -webkit-text-stroke:2px var(--rojo-osc);paint-order:stroke fill;
+  text-shadow:0 0 0 #fff,0 4px 0 #6d0808,0 7px 14px rgba(40,10,0,.45)}
+.titulo.grande{font-size:clamp(54px,16vw,128px);line-height:1.02}
+.titulo.grande span{font-size:.82em}
+.titulo.inclinado{transform:skewX(-9deg)}
+.bajada{margin:0;font-weight:800;font-size:clamp(15px,4vw,20px);color:#fff7e3;text-align:center;max-width:520px;
+  text-shadow:0 2px 0 rgba(60,25,5,.6),0 0 18px rgba(60,25,5,.55)}
+
+/* portada y cierre con franjas negras */
+.portada{justify-content:flex-start;padding-top:calc(16vh + env(safe-area-inset-top))}
+.portada .titulo{filter:drop-shadow(0 3px 0 rgba(255,245,220,.35))}
+.franja-negra{position:absolute;left:0;right:0;bottom:0;height:46px;background:#000}
+.franja-negra.arriba{top:0;bottom:auto;height:46px}
+.final{justify-content:center;padding-top:60px}
+.deslizar{margin-top:auto;margin-bottom:54px;display:flex;flex-direction:column;align-items:center;gap:10px;color:#fff7e3;font-weight:800;text-decoration:none;font-size:14px;letter-spacing:.06em;text-transform:uppercase;text-shadow:0 2px 6px rgba(0,0,0,.6)}
+.deslizar span{width:26px;height:42px;border:3px solid #fff7e3;border-radius:14px;position:relative;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.deslizar span::after{content:"";position:absolute;left:50%;top:7px;width:5px;height:9px;margin-left:-2.5px;border-radius:3px;background:#fff7e3;animation:rueda 1.6s infinite}
+@keyframes rueda{0%{transform:translateY(0);opacity:1}80%{transform:translateY(14px);opacity:0}100%{opacity:0}}
+
+/* tarjetas amarillas */
+.tarjeta{background:var(--tarjeta);border-radius:10px;padding:18px 20px;max-width:680px;width:100%;
+  box-shadow:0 10px 26px rgba(70,30,5,.35),0 0 0 1px rgba(120,80,20,.15);font-weight:500;font-size:clamp(15px,3.9vw,17.5px);line-height:1.55}
+.tarjeta p{margin:0}
+.tarjeta p + p{margin-top:.55em}
+.tarjeta b{font-weight:800}
+.tarjeta.fuerte{font-weight:800}
+.centrada .tarjeta{text-align:center}
+
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:680px}
+.rol{background:rgba(255,233,150,.94);border-radius:10px;padding:12px;text-align:center;display:flex;flex-direction:column;gap:3px;box-shadow:0 8px 18px rgba(70,30,5,.3)}
+.rol .icono{font-size:28px}
+.rol b{font-family:var(--titulo);font-weight:400;color:var(--rojo);font-size:20px}
+.rol small{font-size:13px;font-weight:600}
+
+/* galerías: fotos con borde rasgado */
+.galeria{display:flex;gap:14px;width:calc(100% + 36px);margin:0 -18px;padding:6px 18px 14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.galeria::-webkit-scrollbar{display:none}
+.galeria figure{margin:0;flex:0 0 78%;scroll-snap-align:center;position:relative;filter:drop-shadow(0 10px 14px rgba(60,25,5,.45))}
+.galeria img{display:block;width:100%;height:260px;object-fit:cover;background:#f2e3c0;cursor:zoom-in}
+.galeria.tres img{height:340px;object-position:top}
+.galeria figcaption{position:absolute;left:10px;bottom:10px;background:var(--tarjeta);font-weight:800;font-size:12px;padding:4px 9px;border-radius:6px}
+.nota-escena{margin:0;font-weight:800;color:#fff7e3;text-align:center;text-shadow:0 2px 8px rgba(0,0,0,.6);font-size:15px}
+
+.boton{display:inline-block;font-family:var(--titulo);font-size:24px;color:#fff6dc;text-decoration:none;background:var(--rojo);
+  padding:16px 34px;border-radius:12px;border:3px solid var(--rojo-osc);box-shadow:0 7px 0 var(--rojo-osc),0 14px 26px rgba(60,10,0,.45);
+  letter-spacing:.03em;transition:transform .15s}
+.boton:active{transform:translateY(5px);box-shadow:0 2px 0 var(--rojo-osc)}
+
+/* aparición al hacer scroll */
+.revelar{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.titulo.revelar{transform:translateY(-26px) rotate(-3deg) scale(1.08)}
+.titulo.inclinado.revelar{transform:translateY(-26px) skewX(-9deg) scale(1.08)}
+.visible .revelar,.revelar.visible{opacity:1;transform:none}
+.visible .titulo.inclinado{transform:skewX(-9deg)}
+.visible .revelar:nth-child(2){transition-delay:.12s}
+.visible .revelar:nth-child(3){transition-delay:.24s}
+.visible .revelar:nth-child(4){transition-delay:.36s}
+
+/* visor de imágenes */
+.visor{position:fixed;inset:0;z-index:50;background:rgba(10,6,2,.9);display:flex;align-items:center;justify-content:center;padding:20px}
+.visor[hidden]{display:none}
+.visor img{max-width:100%;max-height:88vh;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.visor button{position:absolute;top:calc(14px + env(safe-area-inset-top));right:14px;width:44px;height:44px;border-radius:50%;border:0;background:var(--tarjeta);font-size:20px;font-weight:800;cursor:pointer}
+
+/* escritorio: misma composición que las láminas */
+@media (min-width:900px){
+  .lamina{padding:110px 6vw 90px}
+  .dividida{flex-direction:row;align-items:center;gap:4vw}
+  .dividida .col-texto{flex:1 1 44%;display:flex;flex-direction:column;align-items:flex-start;gap:22px}
+  .dividida .titulo{text-align:left}
+  .dividida .galeria{flex:1 1 52%}
+  .galeria{width:auto;margin:0;padding:6px;overflow:visible;flex-wrap:wrap;justify-content:center}
+  .galeria figure{flex:1 1 40%}
+  .galeria.tres{max-width:1050px}
+  .galeria.tres figure{flex:1 1 28%}
+  .galeria.tres img{height:420px}
+  .mosaico figure.ancha{flex:1 1 100%}
+  .galeria img{height:240px}
+  .barra{padding-left:5vw;padding-right:5vw}
+  .autor{font-size:24px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .revelar{transition:none;opacity:1;transform:none}
+}
