@@ -1,0 +1,5 @@
+{
+  "caballo": { "medida": 2.25, "rotY": 0, "offset": [0, 0, 0], "alturaOjos": 2.45, "adelante": 0.35 },
+  "soldado": { "medida": 1.85, "rotY": 0, "offset": [0, 0, 0] },
+  "rifle":   { "medida": 1.05, "eje": "largo", "rotY": 0, "rotX": 0, "offset": [0, 0, 0] }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#060d17">
+<title>Entre cerros y balas · versión web</title>
+<style>
+  :root{
+    --noche:#060d17; --crema:#f3e3c3; --ocre:#d9a25b; --rojo:#c2603f; --violeta:#8c4f63; --verde:#7f8a55;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%;background:var(--noche);overflow:hidden;font-family:"Trebuchet MS",system-ui,sans-serif;color:var(--crema);user-select:none;-webkit-user-select:none;touch-action:none}
+  canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+  .capa{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;
+        background:radial-gradient(ellipse at 50% 30%,rgba(6,13,23,.55),rgba(6,13,23,.92));z-index:5;transition:opacity .4s}
+  .capa[hidden]{display:none}
+  .franjas{display:flex;height:6px;width:min(320px,70vw);border-radius:3px;overflow:hidden;margin:14px 0 18px}
+  .franjas i{flex:1}
+  h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(30px,7vw,64px);margin:0;letter-spacing:.02em;line-height:1.02;text-shadow:0 3px 0 rgba(0,0,0,.35)}
+  .sub{font-size:clamp(13px,2.6vw,17px);opacity:.85;max-width:540px;line-height:1.45;margin:0}
+  .ayuda{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin:20px 0 4px;font-size:14px;opacity:.9}
+  .ayuda span{background:rgba(243,227,195,.08);border:1px solid rgba(243,227,195,.18);padding:8px 12px;border-radius:999px}
+  button{font:inherit;cursor:pointer;border:0;border-radius:999px;padding:14px 30px;font-size:18px;font-weight:700;letter-spacing:.03em;
+         background:linear-gradient(180deg,var(--ocre),#b8743f);color:#2a160b;box-shadow:0 6px 0 #7a4422,0 10px 24px rgba(0,0,0,.45);margin-top:22px}
+  button:active{transform:translateY(3px);box-shadow:0 3px 0 #7a4422}
+  .nota{font-size:12px;opacity:.55;margin-top:16px}
+  #hud{position:fixed;inset:0;pointer-events:none;z-index:3}
+  #hud[hidden]{display:none}
+  .fila{position:absolute;top:max(12px,env(safe-area-inset-top));left:14px;right:14px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .chip{background:rgba(6,13,23,.55);border:1px solid rgba(243,227,195,.2);border-radius:12px;padding:6px 12px;font-weight:700;backdrop-filter:blur(4px)}
+  #vida{letter-spacing:2px;font-size:18px}
+  #vida b{color:#e0533d}
+  #vida em{color:rgba(243,227,195,.25);font-style:normal}
+  #puntos{font-size:18px;text-align:right}
+  #puntos small{display:block;font-size:11px;opacity:.7;font-weight:400}
+  #prog{position:absolute;left:50%;transform:translateX(-50%);bottom:max(12px,env(safe-area-inset-bottom));width:min(420px,60vw);height:8px;border-radius:4px;background:rgba(6,13,23,.55);border:1px solid rgba(243,227,195,.25);overflow:hidden}
+  #prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--violeta),var(--rojo),var(--ocre))}
+  #balas{position:absolute;left:14px;bottom:max(12px,env(safe-area-inset-bottom));display:flex;gap:4px;align-items:flex-end}
+  #balas i{width:7px;height:22px;border-radius:3px 3px 1px 1px;background:linear-gradient(180deg,#e8c27a,#9a6a2a)}
+  #balas i.v{opacity:.18}
+  #balas span{font-size:12px;margin-left:6px;opacity:.8}
+  #mira{position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;border:2px solid rgba(243,227,195,.75);border-radius:50%}
+  #mira::after{content:"";position:absolute;left:50%;top:50%;width:4px;height:4px;margin:-2px;background:var(--crema);border-radius:50%}
+  #dano{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:0;background:radial-gradient(ellipse at center,rgba(150,0,0,0) 45%,rgba(170,20,10,.75))}
+  .flecha{position:absolute;top:50%;width:0;height:0;border-top:18px solid transparent;border-bottom:18px solid transparent;opacity:0;transition:opacity .15s;filter:drop-shadow(0 0 6px rgba(0,0,0,.6))}
+  #fIzq{left:10px;border-right:22px solid #e0533d}
+  #fDer{right:10px;border-left:22px solid #e0533d}
+  #aviso{position:absolute;top:22%;left:0;right:0;text-align:center;font-family:Georgia,serif;font-size:clamp(20px,5vw,34px);opacity:0;transition:opacity .3s;text-shadow:0 2px 8px rgba(0,0,0,.7)}
+  #girar{position:fixed;inset:0;z-index:9;display:none;align-items:center;justify-content:center;flex-direction:column;background:var(--noche);text-align:center;padding:30px}
+  .resultado{font-size:15px;line-height:1.7;margin-top:6px;opacity:.92}
+  .resultado b{color:var(--ocre)}
+  #fin.victoria h1{color:#f1d27a}
+  #fin.derrota h1{color:#e0796a}
+  @media (max-height:520px),(max-width:520px){
+    .capa{padding:14px;overflow:auto;justify-content:safe center}
+    .franjas{margin:8px 0 10px}
+    .sub{font-size:13px}
+    .ayuda{gap:6px;margin:10px 0 0;font-size:12px}
+    .ayuda span{padding:5px 9px}
+    button{margin-top:12px;padding:11px 24px;font-size:16px}
+    .nota{margin-top:8px}
+    .resultado{font-size:13px;line-height:1.5}
+  }
+  #nogl{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:30px;text-align:center;z-index:10;background:var(--noche)}
+  #nogl[hidden]{display:none}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="dano"></div>
+
+<div id="hud" hidden>
+  <div class="fila">
+    <div class="chip" id="vida"></div>
+    <div class="chip" id="puntos">0<small>puntos</small></div>
+  </div>
+  <div id="mira"></div>
+  <div class="flecha" id="fIzq"></div>
+  <div class="flecha" id="fDer"></div>
+  <div id="aviso"></div>
+  <div id="balas"></div>
+  <div id="prog"><i></i></div>
+</div>
+
+<section class="capa" id="inicio">
+  <h1>Entre cerros<br>y balas</h1>
+  <div class="franjas"><i style="background:#8c4f63"></i><i style="background:#c2603f"></i><i style="background:#d9a25b"></i><i style="background:#7f8a55"></i><i style="background:#e8cfa1"></i><i style="background:#9b5a3c"></i><i style="background:#6e5a7a"></i></div>
+  <p class="sub">Cabalgá por la quebrada, defendé el paso de las tropas realistas y llegá al final del camino con vida.</p>
+  <div class="ayuda"><span>☝️ Deslizá para mirar</span><span>👆 Tocá para disparar</span><span>✨ Tocá los objetos para recogerlos</span></div>
+  <button id="jugar">Montar y jugar</button>
+  <div class="nota" id="notaModelos">Versión web adaptada para celular</div>
+</section>
+
+<section class="capa" id="fin" hidden>
+  <h1 id="finTitulo">Victoria</h1>
+  <div class="franjas"><i style="background:#8c4f63"></i><i style="background:#c2603f"></i><i style="background:#d9a25b"></i><i style="background:#7f8a55"></i><i style="background:#e8cfa1"></i><i style="background:#9b5a3c"></i><i style="background:#6e5a7a"></i></div>
+  <p class="sub" id="finTexto"></p>
+  <div class="resultado" id="finDatos"></div>
+  <button id="otraVez">Volver a jugar</button>
+</section>
+
+<div id="girar"><div style="font-size:54px">📱↻</div><p class="sub" style="margin-top:14px">Girá el celular para jugar en horizontal</p></div>
+<div id="nogl" hidden><p class="sub">Tu navegador no tiene WebGL2 activado, que hace falta para el juego. Probá con Chrome, Safari o Firefox actualizados.</p></div>
+
+<script type="module" src="./game.js"></script>
+</body>
+</html>
